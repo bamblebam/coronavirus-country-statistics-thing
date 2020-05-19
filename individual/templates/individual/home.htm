@@ -1,0 +1,79 @@
+{% extends 'individual/base.htm' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+
+<div class="form-container">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="flex-wrapper">
+          <div style="flex:4;">
+            {{form|crispy}}
+          </div>
+          <div style="flex:1;">
+            <input class='btn btn-warning' type="submit" value="submit">
+          </div>
+        </div>
+    </form>
+</div>
+{% if form.is_valid %}
+<div class="info-container">
+  <div class="flex-wrapper">
+      <div class="box">
+          <div class="card text-center confirmed" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Total Confirmed</h5>
+                <p class="card-text">{{country_dict.confirmed}}</p>
+              </div>
+            </div>
+      </div>
+      <div class="box ">
+          <div class="card text-center recovered" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Total Recovered</h5>
+                <p class="card-text">{{country_dict.recovered}}</p>
+              </div>
+            </div>
+      </div>
+      <div class="box ">
+          <div class="card text-center deaths" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Total Deaths</h5>
+                <p class="card-text">{{country_dict.deaths}}</p>
+              </div>
+            </div>
+      </div>
+  </div>
+</div>
+{% else %}
+<div class="info-container">
+    <div class="flex-wrapper">
+        <div class="box ">
+            <div class="card text-center confirmed" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Total Confirmed</h5>
+                  <p class="card-text">{{worldwide.TotalConfirmed}}</p>
+                </div>
+              </div>
+        </div>
+        <div class="box ">
+            <div class="card text-center recovered" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Total Recovered</h5>
+                  <p class="card-text">{{worldwide.TotalRecovered}}</p>
+                </div>
+              </div>
+        </div>
+        <div class="box ">
+            <div class="card text-center deaths" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Total Deaths</h5>
+                  <p class="card-text">{{worldwide.TotalDeaths}}</p>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
